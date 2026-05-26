@@ -2,9 +2,6 @@
 
 Enterprise-grade financial reconciliation and transaction intelligence platform built using Spring Boot, PostgreSQL, Flyway, Docker, and JWT-based RBAC authentication.
 
-<p align="center">
-  <img width="900" alt="architecture" src="https://raw.githubusercontent.com/SAMREEN111-hash/AegisFlow-AI/main/assets/aegisflow-architecture.png">
-</p>
 
 ---
 
