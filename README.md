@@ -1,72 +1,130 @@
-Use this cleaner professional README instead.
-This looks much more like a top engineer repo README and not overloaded.
-
-````markdown
 # AegisFlow AI
 
 Enterprise-grade financial reconciliation and transaction intelligence platform built using Spring Boot, PostgreSQL, Flyway, Docker, and JWT-based RBAC authentication.
+
+<p align="center">
+  <img width="900" alt="architecture" src="https://raw.githubusercontent.com/SAMREEN111-hash/AegisFlow-AI/main/assets/aegisflow-architecture.png">
+</p>
 
 ---
 
 ## Overview
 
-AegisFlow AI is a backend platform designed for enterprise financial operations including transaction ingestion, reconciliation workflows, secure authentication, audit-ready architecture, and role-based access control.
+AegisFlow AI is a scalable backend platform designed for enterprise financial operations including transaction ingestion, reconciliation workflows, audit-ready processing, secure authentication, and role-based access control.
 
-The system is inspired by enterprise fintech reconciliation platforms used in banking and operational finance environments.
+The system architecture is inspired by enterprise fintech reconciliation platforms used in banking, payment systems, and operational finance environments.
 
 ---
 
-## Tech Stack
+# Architecture
 
+```text
+                           ┌─────────────────────┐
+                           │   Client Apps/UI    │
+                           └─────────┬───────────┘
+                                     │
+                                     ▼
+                    ┌────────────────────────────────┐
+                    │      Spring Boot REST API      │
+                    └────────────────────────────────┘
+                                     │
+        ┌────────────────────────────┼────────────────────────────┐
+        │                            │                            │
+        ▼                            ▼                            ▼
+
+┌─────────────────┐      ┌────────────────────┐      ┌────────────────────┐
+│ Authentication  │      │ Transaction Engine │      │ Reconciliation     │
+│ & Authorization │      │                    │      │ Engine             │
+└─────────────────┘      └────────────────────┘      └────────────────────┘
+        │                            │                            │
+        ▼                            ▼                            ▼
+
+• JWT Authentication       • CSV Upload APIs          • Rule Execution
+• Refresh Tokens           • Validation Pipeline      • Match Detection
+• RBAC Permissions         • Error Tracking           • Exception Handling
+• Secure Sessions          • Job Monitoring           • Statistics Engine
+
+        └────────────────────────────┼────────────────────────────┘
+                                     │
+                                     ▼
+
+                    ┌────────────────────────────────┐
+                    │        PostgreSQL Database      │
+                    └────────────────────────────────┘
+                                     │
+         ┌───────────────┬───────────────┬───────────────┐
+         ▼               ▼               ▼               ▼
+
+     Identity         Transactions    Reconciliation     Audit
+      Schema             Schema          Schema          Schema
+```
+
+---
+
+# Tech Stack
+
+## Backend
 - Java 21
 - Spring Boot 4
 - Spring Security
 - Spring Data JPA
 - Hibernate
+
+## Database
 - PostgreSQL 16
-- Flyway
-- Docker & Docker Compose
+- Flyway Migration Engine
+
+## Infrastructure
+- Docker
+- Docker Compose
 - Maven
-- Swagger / OpenAPI 3
+
+## Security
 - JWT Authentication
+- Refresh Token Rotation
 - RBAC Authorization
 
+## API Documentation
+- Swagger / OpenAPI 3
+
 ---
 
-## Features
+# Features
 
-- JWT Authentication & Refresh Tokens
+- Enterprise-grade backend architecture
+- JWT authentication and refresh tokens
 - Role-Based Access Control (RBAC)
-- Financial Transaction APIs
-- CSV Transaction Ingestion
-- Reconciliation Rule Engine
-- Match & Exception Tracking
-- Audit-Oriented Database Design
-- Flyway Migration Support
-- Swagger API Documentation
-- Dockerized PostgreSQL Setup
+- Financial transaction APIs
+- CSV transaction ingestion pipeline
+- Reconciliation rule engine
+- Match and exception tracking
+- Audit-oriented database structure
+- Flyway schema versioning
+- Dockerized PostgreSQL environment
+- Swagger/OpenAPI documentation
 
 ---
 
-## API Modules
+# API Modules
 
-### Authentication
+## Authentication APIs
+
 ```http
 POST /api/v1/auth/register
 POST /api/v1/auth/login
 POST /api/v1/auth/refresh
 POST /api/v1/auth/logout
 POST /api/v1/auth/logout-all
-````
+```
 
-### Transactions
+## Transaction APIs
 
 ```http
 GET /api/v1/transactions
 GET /api/v1/transactions/{transactionId}
 ```
 
-### Reconciliation
+## Reconciliation APIs
 
 ```http
 GET  /api/v1/reconciliation/rules
@@ -81,7 +139,7 @@ GET  /api/v1/reconciliation/jobs/{jobId}/exceptions
 POST /api/v1/reconciliation/jobs/run
 ```
 
-### Transaction Ingestion
+## Transaction Ingestion APIs
 
 ```http
 POST /api/v1/transaction-ingestions/csv
@@ -91,7 +149,7 @@ GET  /api/v1/transaction-ingestions/{jobId}/errors
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```text
 src/main/java/com/aegisflow/api
@@ -109,28 +167,28 @@ src/main/java/com/aegisflow/api
 
 ---
 
-## Running The Project
+# Running The Project
 
-### Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/SAMREEN111-hash/AegisFlow-AI.git
 cd AegisFlow-AI
 ```
 
-### Start PostgreSQL
+## Start PostgreSQL
 
 ```bash
 docker compose up -d
 ```
 
-### Run Database Migrations
+## Run Database Migrations
 
 ```bash
 mvn flyway:migrate
 ```
 
-### Start Application
+## Start Application
 
 ```bash
 mvn spring-boot:run
@@ -138,7 +196,7 @@ mvn spring-boot:run
 
 ---
 
-## Swagger Documentation
+# Swagger Documentation
 
 ```text
 http://localhost:8080/swagger-ui/index.html
@@ -146,12 +204,24 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## Author
+# Security Model
+
+The platform implements enterprise RBAC permissions including:
+
+- USER_ADMIN
+- TRANSACTION_READ
+- TRANSACTION_INGEST
+- RECONCILIATION_RUN
+- RECONCILIATION_APPROVE
+- AUDIT_READ
+
+JWT access and refresh tokens are issued during authentication and validated across secured endpoints.
+
+---
+
+# Author
 
 Samreen Shaikh
 
 GitHub:
-[https://github.com/SAMREEN111-hash](https://github.com/SAMREEN111-hash)
-
-```
-```
+https://github.com/SAMREEN111-hash
