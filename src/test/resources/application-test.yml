@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:16:///aegisflow_test
+    username: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+aegisflow:
+  cors:
+    allowed-origins:
+      - http://localhost:5173
+  security:
+    jwt:
+      issuer: aegisflow-ai-test
+      secret: test_secret_that_is_long_enough_for_hmac_sha_256
+      access-token-ttl-minutes: 15
+      refresh-token-ttl-days: 7
