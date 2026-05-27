@@ -62,7 +62,7 @@ The system architecture is inspired by enterprise fintech reconciliation platfor
 
 ## Backend
 - Java 21
-- Spring Boot 4
+- Spring Boot 3
 - Spring Security
 - Spring Data JPA
 - Hibernate
